@@ -1,0 +1,24 @@
+model Organization {
+  id String @id @default(uuid())
+
+  // Основная информация
+  name      String
+  shortName String? @map("short_name")
+
+  // Юридическая информация
+  inn          String? @unique
+  kpp          String?
+  ogrn         String? @unique
+  legalAddress String? @map("legal_address")
+
+  // Контакты
+  phone   String?
+  email   String?
+  website String?
+
+  // Служебные поля
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("organization")
+}

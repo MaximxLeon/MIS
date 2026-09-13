@@ -1,0 +1,22 @@
+model User {
+  id          String @id @default(uuid())
+  // Уникальные данные для пользователя
+  email       String @unique
+  phoneNumber String @unique @map("phone_number")
+
+  // Личные данные пользователя
+  passwordHash String @map("password_hash")
+  family     String?
+  name       String?
+  patronymic String?
+  birthDate  DateTime @map("birth_date")
+
+  // Служебные поля
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Связи
+  session Session[]
+
+  @@map("user")
+}
