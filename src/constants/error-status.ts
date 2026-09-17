@@ -1,8 +1,4 @@
-import type { ErrorCode } from "./error-codes";
-
-export const ERROR_STATUS: Record<ErrorCode, number> = {
-  UNKNOWN: 500,
-
+export const ERROR_STATUS = {
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,

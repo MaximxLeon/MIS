@@ -1,8 +1,11 @@
-import "server-only";
+import 'server-only';
 
-import type { TRegisterDTO } from "@/shared/api/auth/register.schema";
-import { hashPassword } from "@/server/auth/password";
-import { userRepository } from "@/server/api/user";
+import { ERROR_CODES } from '@/constants/error-codes';
+import { ERROR_STATUS } from '@/constants/error-status';
+import { AppError } from '@/server/api/errors';
+import { userRepository } from '@/server/api/user';
+import { hashPassword } from '@/server/auth/password';
+import type { TRegisterDTO } from '@/shared/api/auth/dto/register.request';
 
 export class RegisterService {
   async execute(data: TRegisterDTO) {
@@ -11,16 +14,31 @@ export class RegisterService {
       data.phoneNumber,
     );
 
+    if (existingUser?.email === data.email) {
+      throw new AppError({
+        status: ERROR_STATUS.CONFLICT,
+        code: ERROR_CODES.EMAIL_ALREADY_EXISTS,
+        message: "Пользователь с таким email уже существует",
+        details: {},
+      });
+    }
+
+    if (existingUser?.phoneNumber === data.phoneNumber) {
+      throw new AppError({
+        status: ERROR_STATUS.CONFLICT,
+        code: ERROR_CODES.PHONE_ALREADY_EXISTS,
+        message: "Пользователь с таким номером телефона уже существует",
+        details: {},
+      });
+    }
+
     if (existingUser) {
-      if (existingUser.email === data.email) {
-        throw new Error("Пользователь с таким email уже существует");
-      }
-
-      if (existingUser.phoneNumber === data.phoneNumber) {
-        throw new Error("Пользователь с таким номером телефона уже существует");
-      }
-
-      throw new Error("Пользователь уже существует");
+      throw new AppError({
+        status: ERROR_STATUS.CONFLICT,
+        code: ERROR_CODES.USER_ALREADY_EXISTS,
+        message: "Пользователь уже существует",
+        details: {},
+      });
     }
 
     const passwordHash = await hashPassword(data.password);

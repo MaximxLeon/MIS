@@ -1,11 +1,16 @@
 import "server-only";
 
 import { createHash, randomBytes } from "node:crypto";
-import { cookies } from "next/headers";
-import { prisma } from "../prisma";
+import { cookies, headers } from "next/headers";
+import { prisma } from "@/server/prisma";
+
+import { AppError } from "@/server/api/errors";
+import { ERROR_CODES } from "@/constants/error-codes";
+import { ERROR_STATUS } from "@/constants/error-status";
 
 const SESSION_COOKIE_NAME = "session";
 const SESSION_DURATION = 1000 * 60 * 60 * 24 * 30; // 30 дней
+const SESSION_LAST_USED_UPDATE_INTERVAL = 5 * 60 * 1000;
 
 function generateSessionToken() {
   return randomBytes(32).toString("base64url");
@@ -13,6 +18,21 @@ function generateSessionToken() {
 
 function hashSessionToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
+}
+
+export async function requireSession() {
+  const session = await getSession();
+
+  if (!session) {
+    throw new AppError({
+      status: ERROR_STATUS.UNAUTHORIZED,
+      code: ERROR_CODES.UNAUTHORIZED,
+      message: "Необходима авторизация",
+      details: {},
+    });
+  }
+
+  return session;
 }
 
 export async function getSession() {
@@ -51,14 +71,28 @@ export async function getSession() {
     return null;
   }
 
-  await prisma.session.update({
-    where: {
-      id: session.id,
-    },
-    data: {
-      lastUsedAt: new Date(),
-    },
-  });
+  const now = new Date();
+
+  const shouldUpdateLastUsed =
+    !session.lastUsedAt ||
+    now.getTime() - session.lastUsedAt.getTime() >
+      SESSION_LAST_USED_UPDATE_INTERVAL;
+
+  if (shouldUpdateLastUsed) {
+    await prisma.session.update({
+      where: {
+        id: session.id,
+      },
+      data: {
+        lastUsedAt: now,
+      },
+    });
+
+    return {
+      ...session,
+      lastUsedAt: now,
+    };
+  }
 
   return session;
 }
@@ -66,14 +100,25 @@ export async function getSession() {
 export async function createSession(userId: string) {
   const token = generateSessionToken();
   const tokenHash = hashSessionToken(token);
-
   const expiresAt = new Date(Date.now() + SESSION_DURATION);
+
+  const requestHeaders = await headers();
+
+  const ipAddress =
+    requestHeaders.get("x-forwarded-for")?.split(",")[0].trim() ??
+    requestHeaders.get("x-real-ip") ??
+    null;
+
+  const userAgent = requestHeaders.get("user-agent");
 
   await prisma.session.create({
     data: {
       userId,
       tokenHash,
       expiresAt,
+      ipAddress,
+      userAgent,
+      lastUsedAt: new Date(),
     },
   });
 

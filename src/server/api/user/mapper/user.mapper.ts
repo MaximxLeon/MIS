@@ -1,8 +1,9 @@
 import "server-only";
 
 import type { User } from "@/server/prisma/generated/prisma/client";
+import type { TUserResponseDTO } from "@/shared/api/user";
 
-export function mapUserToResponse(user: User) {
+export function mapUserToResponse(user: User): TUserResponseDTO {
   const fio = [user.family, user.name, user.patronymic]
     .filter(Boolean)
     .join(" ");

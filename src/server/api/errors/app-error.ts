@@ -1,10 +1,15 @@
 import { ErrorCode } from "@/constants/error-codes";
 
-type AppErrorParams = {
+type TApiErrorDetails =
+  | Record<string, string[]>
+  | Record<string, unknown>
+  | unknown[];
+
+type TAppErrorParams = {
   status: number;
   code: ErrorCode;
   message: string;
-  details?: unknown;
+  details: TApiErrorDetails;
 };
 
 export class AppError extends Error {
@@ -12,7 +17,7 @@ export class AppError extends Error {
   readonly code: ErrorCode;
   readonly details?: unknown;
 
-  constructor({ status, code, message, details }: AppErrorParams) {
+  constructor({ status, code, message, details }: TAppErrorParams) {
     super(message);
 
     this.name = "AppError";
