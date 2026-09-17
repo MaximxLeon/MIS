@@ -1,0 +1,10 @@
+model Role {
+  id String @id @default(uuid())
+
+  name String @unique
+
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@map("role")
+}

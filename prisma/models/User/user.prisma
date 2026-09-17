@@ -17,6 +17,8 @@ model User {
 
   // Связи
   session Session[]
+  roles       UserRole[]
+  permissions UserPermission[]
 
   @@map("user")
 }
