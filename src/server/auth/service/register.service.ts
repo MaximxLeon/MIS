@@ -2,9 +2,9 @@ import 'server-only';
 
 import { ERROR_CODES } from '@/constants/error-codes';
 import { ERROR_STATUS } from '@/constants/error-status';
-import { AppError } from '@/server/api/errors';
-import { userRepository } from '@/server/api/user';
 import { hashPassword } from '@/server/auth/password';
+import { AppError } from '@/server/errors';
+import { userRepository } from '@/server/user';
 import type { TRegisterDTO } from '@/shared/api/auth/dto/register.request';
 
 export class RegisterService {

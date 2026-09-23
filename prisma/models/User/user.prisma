@@ -11,6 +11,8 @@ model User {
   patronymic String?
   birthDate  DateTime @map("birth_date")
 
+  isSuperAdmin Boolean @default(false) @map("is_super_admin")
+
   // Служебные поля
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -19,6 +21,7 @@ model User {
   session Session[]
   roles       UserRole[]
   permissions UserPermission[]
+  ownedOrganizations OrganizationOwner[]
 
   @@map("user")
 }

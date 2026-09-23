@@ -1,18 +1,20 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
 
-import { useMeQuery } from "@/entities/user";
-import { useLoginMutation } from "@/features/auth/login";
-import { useLogoutMutation } from "@/features/auth/logout";
-import { useLogoutAllMutation } from "@/features/auth/logout-all";
-
-import { loginSchema, type TLoginDTO } from "@/shared/api/auth";
-import { formatDate } from "@/shared/lib";
-import { Button } from "@/shared/ui/kit/button/button";
-import { Input } from "@/shared/ui/kit/input/input";
-import { getApiErrorMessage } from "@/shared/api";
+import { useMeQuery } from '@/entities/user';
+import { useLoginMutation } from '@/features/auth/login';
+import { useLogoutMutation } from '@/features/auth/logout';
+import { useLogoutAllMutation } from '@/features/auth/logout-all';
+import { getApiErrorMessage } from '@/shared/api';
+import {
+  loginSchema,
+  type TLoginDTO,
+} from '@/shared/api/auth';
+import { formatDate } from '@/shared/lib';
+import { Button } from '@/shared/ui/kit/button/Button';
+import { Input } from '@/shared/ui/kit/input/Input';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginTestPage() {
   const loginMutation = useLoginMutation();

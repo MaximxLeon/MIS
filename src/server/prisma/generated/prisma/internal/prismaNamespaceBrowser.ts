@@ -51,8 +51,14 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  OrganizationOwner: 'OrganizationOwner',
   Organization: 'Organization',
+  Permission: 'Permission',
+  RolePermission: 'RolePermission',
+  Role: 'Role',
   Session: 'Session',
+  UserPermission: 'UserPermission',
+  UserRole: 'UserRole',
   User: 'User'
 } as const
 
@@ -70,6 +76,14 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const OrganizationOwnerScalarFieldEnum = {
+  organizationId: 'organizationId',
+  userId: 'userId'
+} as const
+
+export type OrganizationOwnerScalarFieldEnum = (typeof OrganizationOwnerScalarFieldEnum)[keyof typeof OrganizationOwnerScalarFieldEnum]
 
 
 export const OrganizationScalarFieldEnum = {
@@ -90,6 +104,30 @@ export const OrganizationScalarFieldEnum = {
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -104,6 +142,23 @@ export const SessionScalarFieldEnum = {
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
+export const UserPermissionScalarFieldEnum = {
+  userId: 'userId',
+  permissionId: 'permissionId',
+  allowed: 'allowed'
+} as const
+
+export type UserPermissionScalarFieldEnum = (typeof UserPermissionScalarFieldEnum)[keyof typeof UserPermissionScalarFieldEnum]
+
+
+export const UserRoleScalarFieldEnum = {
+  userId: 'userId',
+  roleId: 'roleId'
+} as const
+
+export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -113,6 +168,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   patronymic: 'patronymic',
   birthDate: 'birthDate',
+  isSuperAdmin: 'isSuperAdmin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

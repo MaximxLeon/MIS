@@ -1,13 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-import { registerSchema } from "@/shared/api/auth";
-import { registerService } from "@/server/auth/service";
-import { createSession } from "@/server/auth/session";
-import { mapUserToResponse } from "@/server/api/user";
-import { AppError } from "@/server/api/errors";
-import { ERROR_CODES } from "@/constants/error-codes";
-import { ERROR_STATUS } from "@/constants/error-status";
-import { handleApiError } from "@/server/api/errors";
+import { ERROR_CODES } from '@/constants/error-codes';
+import { ERROR_STATUS } from '@/constants/error-status';
+import { registerService } from '@/server/auth/service';
+import { createSession } from '@/server/auth/session';
+import {
+  AppError,
+  handleApiError,
+} from '@/server/errors';
+import { mapUserToResponse } from '@/server/user';
+import { registerSchema } from '@/shared/api/auth';
 
 export async function POST(request: Request) {
   try {

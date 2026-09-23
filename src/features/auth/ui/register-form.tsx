@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from '@/shared/ui/kit/button/button';
-import { Input } from '@/shared/ui/kit/input/input';
+import { Button } from '@/shared/ui/kit/button/Button';
+import { Input } from '@/shared/ui/kit/input/Input';
 
 import { useRegisterForm } from '../register/model/use-register-form';
 

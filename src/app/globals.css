@@ -27,7 +27,7 @@
   --surface: #ffffff;
   --muted-bg: #f2f4f7;
   --popover: #ffffff;
-  --overlay: #0000000a;
+  --overlay: hsla(0, 0%, 0%, 0.5);
 
   --heading: #111827;
   --foreground: #111827;
@@ -72,7 +72,7 @@
   --chart-6: #06b6d4;
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #111827;
+  --sidebar-foreground: #f3f4f6;
   --sidebar-primary: #28b9a5;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #e6faf6;
@@ -154,7 +154,7 @@
   --chart-6: #06b6d4;
 
   --sidebar: #151820;
-  --sidebar-foreground: #f3f4f6;
+  --sidebar-foreground: #111827;
   --sidebar-primary: #26bfa8;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1c3935;

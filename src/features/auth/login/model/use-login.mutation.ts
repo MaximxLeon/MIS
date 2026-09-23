@@ -3,7 +3,7 @@
 import { toast } from 'sonner';
 
 import { getApiErrorMessage } from '@/shared/api';
-import { authApi } from '@/shared/api/auth/auth.api';
+import { authApi } from '@/shared/api/auth/api/auth.api';
 import {
   useMutation,
   useQueryClient,

@@ -1,7 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-import { requireSession, deleteAllSessions } from "@/server/auth/session";
-import { handleApiError } from "@/server/api/errors";
+import {
+  deleteAllSessions,
+  requireSession,
+} from '@/server/auth/session';
+import { handleApiError } from '@/server/errors';
 
 export async function POST() {
   try {

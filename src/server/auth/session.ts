@@ -1,12 +1,19 @@
-import "server-only";
+import 'server-only';
 
-import { createHash, randomBytes } from "node:crypto";
-import { cookies, headers } from "next/headers";
-import { prisma } from "@/server/prisma";
+import {
+  createHash,
+  randomBytes,
+} from 'node:crypto';
 
-import { AppError } from "@/server/api/errors";
-import { ERROR_CODES } from "@/constants/error-codes";
-import { ERROR_STATUS } from "@/constants/error-status";
+import {
+  cookies,
+  headers,
+} from 'next/headers';
+
+import { ERROR_CODES } from '@/constants/error-codes';
+import { ERROR_STATUS } from '@/constants/error-status';
+import { AppError } from '@/server/errors';
+import { prisma } from '@/server/prisma';
 
 const SESSION_COOKIE_NAME = "session";
 const SESSION_DURATION = 1000 * 60 * 60 * 24 * 30; // 30 дней

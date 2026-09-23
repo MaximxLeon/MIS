@@ -1,5 +1,9 @@
-import type { ComponentProps, ReactNode } from "react";
-import { tv } from "tailwind-variants";
+import type {
+  ComponentProps,
+  ReactNode,
+} from 'react';
+
+import { tv } from 'tailwind-variants';
 
 const button = tv({
   base: [

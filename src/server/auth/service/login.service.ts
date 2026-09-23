@@ -1,13 +1,11 @@
-import "server-only";
+import 'server-only';
 
-import type { TLoginDTO } from "@/shared/api/auth";
-
-import { verifyPassword } from "@/server/auth/password";
-import { AppError } from "@/server/api/errors";
-import { userRepository } from "@/server/api/user";
-
-import { ERROR_CODES } from "@/constants/error-codes";
-import { ERROR_STATUS } from "@/constants/error-status";
+import { ERROR_CODES } from '@/constants/error-codes';
+import { ERROR_STATUS } from '@/constants/error-status';
+import { verifyPassword } from '@/server/auth/password';
+import { AppError } from '@/server/errors';
+import { userRepository } from '@/server/user';
+import type { TLoginDTO } from '@/shared/api/auth';
 
 export class LoginService {
   async execute(data: TLoginDTO) {

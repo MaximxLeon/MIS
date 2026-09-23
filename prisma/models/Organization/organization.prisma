@@ -16,6 +16,8 @@ model Organization {
   email   String?
   website String?
 
+  owners OrganizationOwner[]
+
   // Служебные поля
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

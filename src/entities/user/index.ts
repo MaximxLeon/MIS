@@ -1,1 +1,1 @@
-export * from './use-me.query'
+export * from './model/use-me.query'

@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Organizations
- * const organizations = await prisma.organization.findMany()
+ * // Fetch zero or more OrganizationOwners
+ * const organizationOwners = await prisma.organizationOwner.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,15 +42,45 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
+ * Model OrganizationOwner
+ * 
+ */
+export type OrganizationOwner = Prisma.OrganizationOwnerModel
+/**
  * Model Organization
  * 
  */
 export type Organization = Prisma.OrganizationModel
 /**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
  * Model Session
  * 
  */
 export type Session = Prisma.SessionModel
+/**
+ * Model UserPermission
+ * 
+ */
+export type UserPermission = Prisma.UserPermissionModel
+/**
+ * Model UserRole
+ * 
+ */
+export type UserRole = Prisma.UserRoleModel
 /**
  * Model User
  * 
