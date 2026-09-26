@@ -1,4 +1,5 @@
 export const PERMISSIONS = {
+  ADMIN_PAGE_READ: "admin-page.read",
   ADMIN_STATISTICS_READ: "admin-statistics.read",
   ADMIN_PERMISSIONS_READ: "admin-permissions.read",
   ADMIN_AUDIT_READ: "admin-audit.read",
@@ -29,20 +30,19 @@ export const PERMISSIONS = {
 export type TPermission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
 
 export const PERMISSION_LABEL: Record<TPermission, string> = {
+  "admin-page.read": "Просмотр страницы администратора",
   "admin-statistics.read": "Просмотр статистика платформы",
   "admin-permissions.read": "Просмотр прав платформы",
   "admin-audit.read": "Просмотр аудита платформы",
 
   "organization.read": "Просмотр организаций",
-  "organization.read.own": "Просмотр своих организаций",
-
   "organization.create": "Создание организаций",
-
   "organization.update": "Редактирование организаций",
-  "organization.update.own": "Редактирование своих организаций",
-
   "organization.delete": "Удаление организаций",
+
+  "organization.update.own": "Редактирование своих организаций",
   "organization.delete.own": "Удаление своих организаций",
+  "organization.read.own": "Просмотр своих организаций",
 
   "user.read": "Просмотр пользователей",
   "user.read.own": "Просмотр своего профиля",

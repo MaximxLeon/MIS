@@ -3,12 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
-import { useLoginMutation } from '@/features/auth/login';
-import { useRegisterMutation } from '@/features/auth/register';
+import { useLoginMutation } from '@/features/auth/login/model';
+import { useRegisterMutation } from '@/features/auth/register/model';
 import {
   registerSchema,
   type TRegisterDTO,
-} from '@/shared/api/auth';
+} from '@/shared/api/auth/dto';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export function useRegisterForm() {

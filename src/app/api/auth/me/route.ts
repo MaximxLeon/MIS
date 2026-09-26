@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { requireSession } from '@/server/auth/session';
 import { handleApiError } from '@/server/errors';
-import { mapUserToResponse } from '@/server/user';
+import { mapUserToResponse } from '@/server/user/mapper';
 
 export async function GET() {
   try {

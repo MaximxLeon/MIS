@@ -3,15 +3,9 @@ import { NextResponse } from 'next/server';
 import { requireSession } from '@/server/auth';
 import { requirePermission } from '@/server/auth/permissions';
 import { handleApiError } from '@/server/errors';
-import {
-  mapOrganizationToResponse,
-} from '@/server/organization/mapper/organization.mapper';
-import {
-  OrganizationService,
-} from '@/server/organization/service/organization.service';
-import {
-  OrganizationCreateDTO,
-} from '@/shared/api/organization/dto/organization-create.dto';
+import { mapOrganizationToResponse } from '@/server/organization/mapper';
+import { OrganizationService } from '@/server/organization/service';
+import { OrganizationCreateDTO } from '@/shared/api/organization/dto';
 import { PERMISSIONS } from '@/shared/config/permissions';
 
 const organizationService = new OrganizationService();

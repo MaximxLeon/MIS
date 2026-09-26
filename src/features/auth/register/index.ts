@@ -1,1 +1,0 @@
-export { useRegisterMutation } from './model/use-register.mutation';

@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
-import { useLoginMutation } from '@/features/auth/login';
+import { useLoginMutation } from '@/features/auth/login/model';
 import {
   loginSchema,
   type TLoginDTO,
-} from '@/shared/api/auth';
+} from '@/shared/api/auth/dto';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export function useLoginForm() {

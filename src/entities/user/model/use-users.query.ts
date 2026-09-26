@@ -1,8 +1,9 @@
 "use client";
 
-import { userApi } from '@/shared/api/user/api/user.api';
-import type { UserListQuery } from '@/shared/api/user/dto/user-list.query';
+import type { UserListQuery } from '@/shared/api/user/dto';
 import { useQuery } from '@tanstack/react-query';
+
+import { userApi } from '../api';
 
 export const useUsersQuery = (query?: UserListQuery) => {
   return useQuery({

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const userResponseDTO = z.object({
+export const UserResponseDTO = z.object({
   id: z.string(),
 
   email: z.email(),
@@ -17,4 +17,4 @@ export const userResponseDTO = z.object({
   updatedAt: z.string(),
 });
 
-export type TUserResponseDTO = z.infer<typeof userResponseDTO>;
+export type TUserResponseDTO = z.infer<typeof UserResponseDTO>;

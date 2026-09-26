@@ -14,6 +14,9 @@ export type SidebarItemProps = {
   title: string;
   href: string;
   icon?: SidebarIcon;
+};
+
+type SidebarItemComponentProps = SidebarItemProps & {
   collapsed: boolean;
 };
 
@@ -22,21 +25,20 @@ export function SidebarItem({
   href,
   icon,
   collapsed,
-}: SidebarItemProps) {
+}: SidebarItemComponentProps) {
   const pathname = usePathname();
 
   const Icon = icon ? SIDEBAR_ICONS[icon] : undefined;
-
   const active = pathname === href || pathname.endsWith(`${href}/`);
 
   return (
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-md px-3 py-2 text-md text-text-muted font-semibold",
+        "flex items-center gap-3 rounded-md px-3 py-2 text-md font-semibold text-text-muted",
         "transition-colors",
         "hover:bg-primary hover:text-primary-light",
-        active && "bg-primary-light text-primary border-r-4",
+        active && "border-r-4 bg-primary-light text-primary",
         active && collapsed && "border-none",
         collapsed && "px-2",
       )}

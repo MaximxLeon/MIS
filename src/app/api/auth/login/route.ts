@@ -6,8 +6,8 @@ import { loginService } from '@/server/auth/service';
 import { createSession } from '@/server/auth/session';
 import { handleApiError } from '@/server/errors';
 import { AppError } from '@/server/errors/app-error';
-import { mapUserToResponse } from '@/server/user';
-import { loginSchema } from '@/shared/api/auth';
+import { mapUserToResponse } from '@/server/user/mapper';
+import { loginSchema } from '@/shared/api/auth/dto';
 
 export async function POST(request: Request) {
   try {

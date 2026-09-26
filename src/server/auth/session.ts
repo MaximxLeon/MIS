@@ -58,7 +58,15 @@ export async function getSession() {
       tokenHash,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          permissions: {
+            include: {
+              permission: true,
+            },
+          },
+        },
+      },
     },
   });
 

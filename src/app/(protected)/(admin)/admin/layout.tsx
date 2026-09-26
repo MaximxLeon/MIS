@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { requirePagePermission } from '@/server/auth/guards';
+import { PERMISSIONS } from '@/shared/config/permissions';
 import {
   AdminMobileSidebar,
 } from '@/widgets/admin-sidebar/ui/admin-mobile-sidebar';
@@ -9,7 +11,9 @@ type AdminLayoutProps = {
   children: ReactNode;
 };
 
-export default function AdminLayout({ children }: AdminLayoutProps) {
+export default async function AdminLayout({ children }: AdminLayoutProps) {
+  await requirePagePermission([PERMISSIONS.ADMIN_PAGE_READ]);
+
   return (
     <div className="min-h-screen lg:flex">
       <div className="hidden lg:block">

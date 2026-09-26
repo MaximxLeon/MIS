@@ -11,7 +11,7 @@ import { getApiErrorMessage } from '@/shared/api';
 import {
   type OrganizationCreate,
   OrganizationCreateDTO,
-} from '@/shared/api/organization/dto/organization-create.dto';
+} from '@/shared/api/organization/dto';
 import {
   Button,
   Input,

@@ -3,8 +3,8 @@ import 'server-only';
 import { ERROR_CODES } from '@/constants/error-codes';
 import { ERROR_STATUS } from '@/constants/error-status';
 import { AppError } from '@/server/errors';
-import { userRepository } from '@/server/user';
-import { ParsedUserListQuery } from '@/shared/api/user/dto/user-list.query';
+import { userRepository } from '@/server/user/repository';
+import { ParsedUserListQuery } from '@/shared/api/user/dto';
 
 export class UserService {
   async getById(id: string) {

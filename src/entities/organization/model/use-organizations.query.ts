@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { organizationApi } from '../api/organization.api';
+import { organizationApi } from '../api/organization.api.rest';
 
 export const useOrganizationsQuery = () => {
   return useQuery({

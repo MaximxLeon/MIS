@@ -1,15 +1,15 @@
-import {
-  getUserPermissions,
-  requireSession,
-} from '@/server/auth';
+import { requireSession } from '@/server/auth';
 import {
   PERMISSIONS,
   type TPermission,
 } from '@/shared/config/permissions';
+import {
+  createPermissionChecker,
+} from '@/shared/lib/create-permission-checker';
 import type { SidebarItemProps } from '@/shared/ui/sidebar';
 
 type AdminSidebarItem = SidebarItemProps & {
-  permission: TPermission;
+  permissions: TPermission[];
 };
 
 const ADMIN_SIDEBAR_ITEMS: AdminSidebarItem[] = [
@@ -17,47 +17,54 @@ const ADMIN_SIDEBAR_ITEMS: AdminSidebarItem[] = [
     title: "Главная",
     href: "/admin",
     icon: "home",
-    permission: PERMISSIONS.ADMIN_STATISTICS_READ,
+    permissions: [PERMISSIONS.ADMIN_STATISTICS_READ],
   },
   {
     title: "Организации",
     href: "/admin/organizations",
     icon: "building",
-    permission: PERMISSIONS.ORGANIZATION_READ,
+    permissions: [
+      PERMISSIONS.ORGANIZATION_READ,
+      PERMISSIONS.ORGANIZATION_READ_OWN,
+    ],
   },
   {
     title: "Пользователи",
     href: "/admin/users",
     icon: "users",
-    permission: PERMISSIONS.USER_READ,
+    permissions: [PERMISSIONS.USER_READ],
   },
   {
     title: "Роли",
     href: "/admin/roles",
     icon: "shield",
-    permission: PERMISSIONS.ROLE_READ,
+    permissions: [PERMISSIONS.ROLE_READ],
   },
   {
     title: "Права",
     href: "/admin/permissions",
     icon: "shieldCog",
-    permission: PERMISSIONS.ADMIN_PERMISSIONS_READ,
+    permissions: [PERMISSIONS.ADMIN_PERMISSIONS_READ],
   },
   {
     title: "Аудит",
     href: "/admin/audits",
     icon: "logs",
-    permission: PERMISSIONS.ADMIN_AUDIT_READ,
+    permissions: [PERMISSIONS.ADMIN_AUDIT_READ],
   },
 ];
 
-// Получить доступные пункты админки
 export async function getAdminSidebarItems(): Promise<SidebarItemProps[]> {
   const session = await requireSession();
-  const permissions = await getUserPermissions(session.userId);
 
-  return ADMIN_SIDEBAR_ITEMS.filter(({ permission }) =>
-    permissions.has(permission),
+  const permissions = session.user.permissions
+    .filter((item) => item.allowed)
+    .map((item) => item.permission.name as TPermission);
+
+  const { can } = createPermissionChecker(permissions);
+
+  return ADMIN_SIDEBAR_ITEMS.filter(({ permissions }) =>
+    permissions.some((permission) => can(permission)),
   ).map(({ title, href, icon }) => ({
     title,
     href,

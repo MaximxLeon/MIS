@@ -1,6 +1,6 @@
 import type { PrismaTransaction } from '@/server/prisma';
 import { prisma } from '@/server/prisma';
-import type { OrganizationCreate } from '@/shared/api/organization';
+import type { OrganizationCreate } from '@/shared/api/organization/dto';
 
 export class OrganizationRepository {
   // Найти организацию
@@ -13,6 +13,21 @@ export class OrganizationRepository {
   // Найти все организации
   async findAll() {
     return prisma.organization.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
+
+  async findAllForUser(userId: string) {
+    return prisma.organization.findMany({
+      where: {
+        owners: {
+          some: {
+            userId,
+          },
+        },
+      },
       orderBy: {
         createdAt: "desc",
       },

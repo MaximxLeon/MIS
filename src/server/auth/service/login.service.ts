@@ -4,8 +4,8 @@ import { ERROR_CODES } from '@/constants/error-codes';
 import { ERROR_STATUS } from '@/constants/error-status';
 import { verifyPassword } from '@/server/auth/password';
 import { AppError } from '@/server/errors';
-import { userRepository } from '@/server/user';
-import type { TLoginDTO } from '@/shared/api/auth';
+import { userRepository } from '@/server/user/repository';
+import type { TLoginDTO } from '@/shared/api/auth/dto';
 
 export class LoginService {
   async execute(data: TLoginDTO) {

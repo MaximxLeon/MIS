@@ -12,8 +12,11 @@ import {
   X,
 } from 'lucide-react';
 
-import { useUsersQuery } from '@/entities/user/model/use-users.query';
-import { cn } from '@/shared/lib';
+import { useUsersQuery } from '@/entities/user/model';
+import {
+  cn,
+  formatDate,
+} from '@/shared/lib';
 import { useDebounce } from '@/shared/lib/use-debounce';
 import { Input } from '@/shared/ui/kit';
 
@@ -144,7 +147,7 @@ export function UserMultiSelect({
         />
 
         {open && (
-          <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-auto rounded-lg border border-border bg-card p-1 shadow-lg">
+          <div className="absolute bottom-0 left-0 right-0 z-50 mb-2 max-h-60 overflow-auto rounded-lg border border-border bg-card p-1 shadow-lg">
             {isLoading ? (
               <div className="px-3 py-2 text-sm text-text-muted">Поиск...</div>
             ) : users.length === 0 ? (
@@ -171,8 +174,13 @@ export function UserMultiSelect({
                     <div className="min-w-0">
                       <div className="truncate text-sm">{user.fio}</div>
 
-                      <div className="truncate text-xs text-text-muted">
-                        {user.email}
+                      <div className="flex flex-row gap-2">
+                        <div className="truncate text-xs text-text-muted">
+                          {user.email}
+                        </div>
+                        <div className="truncate text-xs text-text-muted">
+                          [{formatDate(user.birthDate)}]
+                        </div>
                       </div>
                     </div>
 

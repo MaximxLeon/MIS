@@ -1,9 +1,7 @@
-'use client';
+"use client";
 
-import { organizationApi } from '@/entities/organization/api/organization.api';
-import type {
-  OrganizationCreate,
-} from '@/shared/api/organization/dto/organization-create.dto';
+import { organizationApi } from '@/entities/organization/api';
+import type { OrganizationCreate } from '@/shared/api/organization/dto';
 import {
   useMutation,
   useQueryClient,
@@ -13,13 +11,17 @@ export const useCreateOrganizationMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: OrganizationCreate) =>
-      organizationApi.create(data),
+    mutationFn: (data: OrganizationCreate) => organizationApi.create(data),
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['organizations'],
-      });
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ["organizations", "with-owners"],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ["organizations", "my"],
+        }),
+      ]);
     },
   });
 };

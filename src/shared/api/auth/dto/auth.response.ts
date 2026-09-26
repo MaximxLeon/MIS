@@ -1,8 +1,9 @@
-import { z } from "zod";
-import { userResponseDTO } from "@/shared/api/user"
+import { z } from 'zod';
+
+import { UserResponseDTO } from '@/shared/api/user';
 
 export const AuthResponseDto = z.object({
-  user: userResponseDTO,
+  user: UserResponseDTO,
 });
 
 export type TAuthResponseDTO = z.infer<typeof AuthResponseDto>;

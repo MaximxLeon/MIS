@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 import { requireSession } from '@/server/auth';
 import { requirePermission } from '@/server/auth/permissions';
 import { handleApiError } from '@/server/errors';
-import { mapUserToResponse } from '@/server/user/mapper/user.mapper';
-import { userService } from '@/server/user/service/user.service';
+import { mapUserToResponse } from '@/server/user/mapper';
+import { userService } from '@/server/user/service';
 import { UserListQueryDTO } from '@/shared/api/user';
 import { PERMISSIONS } from '@/shared/config/permissions';
 

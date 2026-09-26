@@ -15,6 +15,15 @@ export class OrganizationOwnerRepository {
       },
     });
   }
+  
+  // Получить все организации с владельцами
+  async findAll() {
+    return prisma.organizationOwner.findMany({
+      include: {
+        user: true,
+      },
+    });
+  }
 
   // Найти всех владельцев организации
   async findByOrganizationId(organizationId: string) {

@@ -1,5 +1,5 @@
 import type { Organization } from '@/server/prisma/generated/prisma/client';
-import { OrganizationResponse } from '@/shared/api/organization';
+import { OrganizationResponse } from '@/shared/api/organization/dto';
 
 export function mapOrganizationToResponse(
   organization: Organization,

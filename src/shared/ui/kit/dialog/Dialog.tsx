@@ -1,6 +1,9 @@
 "use client";
 
-import type { ReactNode } from 'react';
+import type {
+  MouseEvent,
+  ReactNode,
+} from 'react';
 import { useEffect } from 'react';
 
 import { X } from 'lucide-react';
@@ -44,42 +47,40 @@ export function Dialog({
     return null;
   }
 
+  const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50">
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-overlay" onClick={onClose} />
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-overlay p-4"
+      onMouseDown={handleBackdropClick}
+    >
+      <div
+        className={cn(
+          "relative flex w-full max-w-lg flex-col",
+          "max-h-[calc(100dvh-2rem)]",
+          "rounded-xl bg-card shadow-xl",
+          className,
+        )}
+      >
+        <div className="flex shrink-0 items-center justify-between border-b border-border px-6 py-4">
+          {title && <h2 className="text-xl font-bold">{title}</h2>}
 
-      {/* Scroll container */}
-      <div className="relative h-full overflow-y-auto">
-        <div className="flex min-h-full items-center justify-center p-4">
-          {/* Dialog */}
-          <div
-            className={cn(
-              "relative z-10 flex w-full max-w-lg flex-col",
-              "max-h-[calc(100dvh-2rem)]",
-              "rounded-xl bg-card shadow-xl",
-              className,
-            )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-auto rounded-md p-2 hover:bg-muted-bg"
+            aria-label="Закрыть"
           >
-            {/* Header */}
-            <div className="flex shrink-0 items-center justify-between border-b border-border px-6 py-4">
-              {title && <h2 className="text-xl font-bold">{title}</h2>}
+            <X className="size-6 text-chart-5" />
+          </button>
+        </div>
 
-              <button
-                type="button"
-                onClick={onClose}
-                className="ml-auto rounded-md p-2 hover:bg-muted-bg"
-                aria-label="Закрыть"
-              >
-                <X className="size-6 text-chart-5" />
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="min-h-0 flex-1 overflow-y-auto px-6 py-4">
-              {children}
-            </div>
-          </div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-4">
+          {children}
         </div>
       </div>
     </div>

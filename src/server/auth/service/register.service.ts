@@ -4,7 +4,7 @@ import { ERROR_CODES } from '@/constants/error-codes';
 import { ERROR_STATUS } from '@/constants/error-status';
 import { hashPassword } from '@/server/auth/password';
 import { AppError } from '@/server/errors';
-import { userRepository } from '@/server/user';
+import { userRepository } from '@/server/user/repository';
 import type { TRegisterDTO } from '@/shared/api/auth/dto/register.request';
 
 export class RegisterService {

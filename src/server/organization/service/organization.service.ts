@@ -3,18 +3,14 @@ import { ERROR_STATUS } from '@/constants/error-status';
 import { AppError } from '@/server/errors';
 import {
   OrganizationOwnerRepository,
-} from '@/server/organization/repository/organization-owner.repository';
-import {
   OrganizationRepository,
-} from '@/server/organization/repository/organization.repository';
+} from '@/server/organization/repository';
 import { prisma } from '@/server/prisma';
 import { Prisma } from '@/server/prisma/generated/prisma/client';
 import type {
   OrganizationCreate,
-} from '@/shared/api/organization/dto/organization-create.dto';
-import type {
   OrganizationUpdate,
-} from '@/shared/api/organization/dto/organization-update.dto';
+} from '@/shared/api/organization/dto';
 
 export class OrganizationService {
   private readonly organizationRepository = new OrganizationRepository();
@@ -48,6 +44,31 @@ export class OrganizationService {
     const owners = await this.organizationOwnerRepository.findByUserId(userId);
 
     return owners.map((owner) => owner.organization);
+  }
+
+  async getAllForUserWithOwners(userId: string) {
+    const organizations =
+      await this.organizationRepository.findAllForUser(userId);
+
+    const owners = await this.organizationOwnerRepository.findAll();
+
+    const ownersByOrganization = new Map<string, typeof owners>();
+
+    for (const owner of owners) {
+      const organizationOwners =
+        ownersByOrganization.get(owner.organizationId) ?? [];
+
+      organizationOwners.push(owner);
+
+      ownersByOrganization.set(owner.organizationId, organizationOwners);
+    }
+
+    return organizations.map((organization) => ({
+      ...organization,
+      owners: (ownersByOrganization.get(organization.id) ?? []).map(
+        (owner) => owner.user,
+      ),
+    }));
   }
 
   // Создать организацию
@@ -196,5 +217,30 @@ export class OrganizationService {
   // Проверить владельца
   async isOwner(organizationId: string, userId: string) {
     return this.organizationOwnerRepository.isOwner(organizationId, userId);
+  }
+
+  // Получить все организации с владельцами
+  async getAllWithOwners() {
+    const organizations = await this.organizationRepository.findAll();
+
+    const owners = await this.organizationOwnerRepository.findAll();
+
+    const ownersByOrganization = new Map<string, typeof owners>();
+
+    for (const owner of owners) {
+      const organizationOwners =
+        ownersByOrganization.get(owner.organizationId) ?? [];
+
+      organizationOwners.push(owner);
+
+      ownersByOrganization.set(owner.organizationId, organizationOwners);
+    }
+
+    return organizations.map((organization) => ({
+      ...organization,
+      owners: (ownersByOrganization.get(organization.id) ?? []).map(
+        (owner) => owner.user,
+      ),
+    }));
   }
 }

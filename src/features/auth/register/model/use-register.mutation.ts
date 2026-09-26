@@ -2,7 +2,7 @@
 
 import { toast } from 'sonner';
 
-import { authApi } from '@/shared/api/auth/api/auth.api';
+import { authApi } from '@/shared/api/auth/api/rest/auth.api.rest';
 import {
   useMutation,
   useQueryClient,

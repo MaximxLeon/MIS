@@ -1,0 +1,28 @@
+query Organizations {
+  organizations {
+    id
+    name
+    shortName
+    inn
+    kpp
+    ogrn
+    legalAddress
+    phone
+    email
+    website
+    createdAt
+    updatedAt
+    owners {
+      id
+      email
+      phoneNumber
+      family
+      name
+      patronymic
+      fio
+      birthDate
+      createdAt
+      updatedAt
+    }
+  }
+}

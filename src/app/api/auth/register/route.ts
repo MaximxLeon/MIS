@@ -8,8 +8,8 @@ import {
   AppError,
   handleApiError,
 } from '@/server/errors';
-import { mapUserToResponse } from '@/server/user';
-import { registerSchema } from '@/shared/api/auth';
+import { mapUserToResponse } from '@/server/user/mapper';
+import { registerSchema } from '@/shared/api/auth/dto';
 
 export async function POST(request: Request) {
   try {

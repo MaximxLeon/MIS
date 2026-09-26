@@ -2,7 +2,7 @@ import 'server-only';
 
 import { prisma } from '@/server/prisma';
 import { Prisma } from '@/server/prisma/generated/prisma/client';
-import { ParsedUserListQuery } from '@/shared/api/user/dto/user-list.query';
+import { ParsedUserListQuery } from '@/shared/api/user/dto';
 
 export class UserRepository {
   async findById(id: string) {

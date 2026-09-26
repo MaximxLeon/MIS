@@ -8,7 +8,7 @@ import {
   User2Icon,
 } from 'lucide-react';
 
-import { useMeQuery } from '@/entities/user';
+import { useMeQuery } from '@/entities/user/model';
 import { cn } from '@/shared/lib';
 
 import {

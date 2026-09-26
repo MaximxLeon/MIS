@@ -2,15 +2,15 @@
 
 import { useForm } from 'react-hook-form';
 
-import { useMeQuery } from '@/entities/user';
-import { useLoginMutation } from '@/features/auth/login';
-import { useLogoutMutation } from '@/features/auth/logout';
-import { useLogoutAllMutation } from '@/features/auth/logout-all';
+import { useMeQuery } from '@/entities/user/model';
+import { useLoginMutation } from '@/features/auth/login/model';
+import { useLogoutAllMutation } from '@/features/auth/logout-all/model';
+import { useLogoutMutation } from '@/features/auth/logout/model';
 import { getApiErrorMessage } from '@/shared/api';
 import {
   loginSchema,
   type TLoginDTO,
-} from '@/shared/api/auth';
+} from '@/shared/api/auth/dto';
 import { formatDate } from '@/shared/lib';
 import { Button } from '@/shared/ui/kit/button/Button';
 import { Input } from '@/shared/ui/kit/input/Input';
